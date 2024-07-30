@@ -12,6 +12,7 @@ const schema = yup.object().shape({
 });
 
 const Mail = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
   const {
     register,

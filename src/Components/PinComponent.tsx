@@ -30,8 +30,8 @@ const PinComponent: React.FC = () => {
   return (
     <div className="p-8 mt-32 max-w-md mx-auto bg-white space-y-6 items-center justify-center">
       <div className="text-center flex flex-col gap-6">
-        <h1 className="text-3xl font-bold text-[#15274f]">Welcome Back<br />Lilian Eze,</h1>
-        <p className="text-lg text-[#15274f]">Use your PIN to log into your account</p>
+        <h1 className="text-3xl font-bold text-[#15274f]">Welcome Back<br /></h1>
+        <p className="text-lg text-[#15274f]">Kindly put your pin to login into your account</p>
       </div>
 
       {/* PIN Input Fields */}
