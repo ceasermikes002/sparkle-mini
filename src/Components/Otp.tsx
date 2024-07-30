@@ -1,0 +1,106 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { FaEnvelope } from 'react-icons/fa'; // Importing a mail icon from react-icons
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
+interface OtpInputProps {
+  length?: number;
+  onChange?: (otp: string) => void;
+}
+
+const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
+  const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const value = e.target.value;
+    if (/^\d$/.test(value) || value === '') {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+
+      if (onChange) {
+        onChange(newOtp.join(''));
+      }
+
+      if (value && index < length - 1) {
+        inputRefs.current[index + 1].focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === 'Backspace' && index > 0 && !otp[index]) {
+      inputRefs.current[index - 1].focus();
+    }
+  };
+
+  useEffect(() => {
+    inputRefs.current[0].focus();
+  }, []);
+
+  return (
+    <div className="p-8 max-w-md mx-auto bg-white rounded-lg space-y-6 mt-16">
+      
+      {/* Heading */}
+      <h1 className="text-center text-3xl font-bold mb-4">Check your email</h1>
+
+      {/* Paragraph Text */}
+      <p className="text-center text-gray-700 text-lg mb-4">
+      We have sent an otp to your email. Input the code below
+      </p>
+
+      {/* Yellow Mail Icon */}
+      <div className="flex justify-center mb-4 pt-8">
+        <FaEnvelope className="text-yellow-500 text-5xl" />
+      </div>
+
+      {/* OTP Input Fields */}
+      <div className="flex justify-center space-x-3 pb-6">
+        {Array.from({ length }).map((_, index) => (
+          <input
+            key={index}
+            type="text"
+            value={otp[index]}
+            onChange={(e) => handleChange(e, index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            maxLength={1}
+            className="w-16 h-16 text-center border-b-2 border-gray-300 rounded-none focus:outline-none focus:border-blue-500 text-2xl"
+            ref={(ref) => ref && (inputRefs.current[index] = ref)}
+          />
+        ))}
+      </div>
+
+      {/* Buttons */}
+      <Stack spacing={2} direction="column">
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: '#68a502',
+            '&:hover': { bgcolor: '#4b8e2b' },
+            borderRadius: '9999px', // Rounded full
+          }}
+          color="success"
+        >
+          Validate OTP
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            borderColor: '#333',
+            color: '#000',
+            '&:hover': { borderColor: '#4b8e2b', color: '#4b8e2b' },
+            borderRadius: '9999px', // Rounded full
+          }}
+        >
+          Open Email
+        </Button>
+      </Stack>
+
+      {/* Additional Text */}
+      <p className="text-center text-gray-600 text-lg">I didn't receive any email from Sparkle</p>
+    </div>
+  );
+};
+
+export default OtpInput;
