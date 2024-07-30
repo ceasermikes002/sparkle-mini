@@ -13,11 +13,11 @@ const EmailVerification: React.FC = () => {
   // Handle form submission
   const handleSubmit = () => {
     setLoading(true);
-    // Simulate an API call or async operation
+    // Simulate the API call or async operation
     setTimeout(() => {
       console.log('Submitted Email:', email);
       setLoading(false);
-      // Add your logic here for further processing
+      // Add the logic here for processing
     }, 1000); // Simulating async operation with setTimeout
   };
 
