@@ -10,6 +10,7 @@ interface OtpInputProps {
 
 const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
   const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
+  const [loading, setLoading] = useState(false);
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -38,6 +39,16 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
   useEffect(() => {
     inputRefs.current[0].focus();
   }, []);
+
+  const handleSubmit = () => {
+    setLoading(true);
+    // Simulate an API call or async operation
+    setTimeout(() => {
+      setLoading(false);
+      console.log('Submitted OTP:', otp.join(''));
+      // Add your logic here for further processing, like OTP validation
+    }, 1000); // Simulating async operation with setTimeout
+  };
 
   return (
     <div className="p-8 max-w-md mx-auto bg-white rounded-lg space-y-6 mt-16">
@@ -82,20 +93,10 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
             padding: '12px 24px',  // Add padding
           }}
           color="success"
+          onClick={handleSubmit}
+          disabled={loading}
         >
-          Validate OTP
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            borderColor: '#333',
-            color: '#000',
-            '&:hover': { borderColor: '#4b8e2b', color: '#4b8e2b' },
-            borderRadius: '9999px', // Rounded full
-            padding: '12px 24px',  // Add padding
-          }}
-        >
-          Open Email
+          {loading ? 'Validating...' : 'Validate OTP'}
         </Button>
       </Stack>
 
