@@ -1,6 +1,26 @@
-import { MdMail, MdArrowBack } from "react-icons/md";
+import React, { useState } from 'react';
+import { MdMail, MdArrowBack } from 'react-icons/md';
 
-const EmailVerification = () => {
+const EmailVerification: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+
+  // Handle email input change
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  // Handle form submission
+  const handleSubmit = () => {
+    setLoading(true);
+    // Simulate an API call or async operation
+    setTimeout(() => {
+      console.log('Submitted Email:', email);
+      setLoading(false);
+      // Add your logic here for further processing
+    }, 1000); // Simulating async operation with setTimeout
+  };
+
   return (
     <div className="relative min-h-screen p-4 bg-white">
       <div className="absolute top-4 left-4">
@@ -18,12 +38,18 @@ const EmailVerification = () => {
           <input
             type="text"
             placeholder="Email Address"
+            value={email}
+            onChange={handleEmailChange}
             className="flex-1 p-3 text-lg rounded-md focus:outline-none"
           />
         </div>
         <div className="w-full max-w-md mt-24">
-          <button className="w-full bg-[#68a502] p-3 rounded-full text-white text-lg  hover:bg-[#5b8e02]">
-            Verify Email
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className={`w-full bg-[#68a502] p-3 rounded-full text-white text-lg hover:bg-[#5b8e02] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            {loading ? 'Loading...' : 'Verify Email'}
           </button>
         </div>
       </section>
