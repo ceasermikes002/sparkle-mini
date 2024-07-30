@@ -47,7 +47,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
 
       {/* Paragraph Text */}
       <p className="text-center text-gray-700 text-lg mb-4">
-      We have sent an otp to your email. Input the code below
+        We have sent an OTP to your email. Input the code below
       </p>
 
       {/* Yellow Mail Icon */}
@@ -79,6 +79,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
             bgcolor: '#68a502',
             '&:hover': { bgcolor: '#4b8e2b' },
             borderRadius: '9999px', // Rounded full
+            padding: '12px 24px',  // Add padding
           }}
           color="success"
         >
@@ -91,6 +92,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onChange }) => {
             color: '#000',
             '&:hover': { borderColor: '#4b8e2b', color: '#4b8e2b' },
             borderRadius: '9999px', // Rounded full
+            padding: '12px 24px',  // Add padding
           }}
         >
           Open Email

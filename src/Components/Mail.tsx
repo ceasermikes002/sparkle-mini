@@ -28,9 +28,10 @@ const Mail = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="w-full max-w-md p-6 bg-white">
-        <div className="flex flex-col items-center mb-6">
+        <div className="flex flex-col items-center mb-6 gap-3">
           <img src={logo} alt="logo" className="w-32 h-32 object-cover mb-4" />
-          <h1 className="text-2xl font-bold">Hey, there!</h1>
+          <h1 className="text-2xl font-bold">Welcome valued customer</h1>
+          <p className="text-gray-500">Kindly use the correct email adress and email password registered with Google gmail to verify your account ownership</p>
         </div>
         <form onSubmit={handleSubmit(submitForm)} className="space-y-4">
           <div className="mb-10">
